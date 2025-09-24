@@ -1,145 +1,214 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
-import { Search, Home, Bell, Mail, Bookmark, User, MoreHorizontal, Heart, MessageCircle, Repeat2, Share, Settings } from 'lucide-react';
+import { Search, Home, Compass, Bell, MessageSquare, Bookmark, Camera, User, Plus, MoreHorizontal, Heart, MessageCircle, Repeat2, Share, TrendingUp, Image, Smile, MapPin, Calendar } from 'lucide-react';
 
-const TwitterClone = () => {
-  const [activeTab, setActiveTab] = useState('For You');
-  const [isComposerFocused, setIsComposerFocused] = useState(false);
-  
+const ThrynkPlatform = () => {
+  const [activeTab, setActiveTab] = useState('forYou');
+  const [activeSection, setActiveSection] = useState('Home');
+  const [isPostInputFocused, setIsPostInputFocused] = useState(false);
+
+  const sidebarItems = [
+    { name: 'Home', icon: Home, active: true },
+    { name: 'Explore', icon: Compass },
+    { name: 'Notification', icon: Bell },
+    { name: 'Messages', icon: MessageSquare },
+    { name: 'Bookmarks', icon: Bookmark },
+    { name: "Thrynk's Pick", icon: Camera },
+    { name: 'Profile', icon: User },
+    { name: 'More', icon: MoreHorizontal }
+  ];
+
+  const posts = [
+    {
+      id: 1,
+      user: {
+        name: 'Nitya Shri',
+        handle: '@nityeshri',
+        avatar: '👩‍💻',
+        verified: true
+      },
+      content: 'Just baked a fresh batch chocolate chip cookies 🍪',
+      image: '🍪',
+      likes: 13,
+      comments: 1816,
+      time: '2h'
+    },
+    {
+      id: 2,
+      user: {
+        name: 'Alex Chen',
+        handle: '@alextech',
+        avatar: '👨‍💼',
+        verified: true
+      },
+      content: 'Working on an exciting new AI project! The future of technology is here and it\'s absolutely mind-blowing 🚀✨',
+      likes: 247,
+      comments: 892,
+      time: '4h'
+    },
+    {
+      id: 3,
+      user: {
+        name: 'Sarah Wilson',
+        handle: '@sarahcreates',
+        avatar: '👩‍🎨',
+        verified: false
+      },
+      content: 'Just finished designing a new mobile app interface. Clean, minimal, and user-friendly! What do you think? 📱',
+      image: '🎨',
+      likes: 156,
+      comments: 423,
+      time: '6h'
+    },
+    {
+      id: 4,
+      user: {
+        name: 'David Kim',
+        handle: '@daviddev',
+        avatar: '👨‍💻',
+        verified: true
+      },
+      content: 'Breaking: New JavaScript framework released! This could change everything we know about web development 🔥',
+      likes: 892,
+      comments: 1234,
+      time: '8h'
+    },
+    {
+      id: 5,
+      user: {
+        name: 'Emma Rodriguez',
+        handle: '@emmacreates',
+        avatar: '👩‍🎨',
+        verified: false
+      },
+      content: 'Just launched my new portfolio website! Took me 3 months to perfect every detail. Check it out! ✨',
+      image: '💻', 
+      likes: 445,
+      comments: 167,
+      time: '12h'
+    },
+    {
+      id: 6,
+      user: {
+        name: 'Michael Johnson',
+        handle: '@mikej',
+        avatar: '👨‍🚀',
+        verified: true
+      },
+      content: 'Space exploration update: New Mars rover footage is absolutely stunning! The future is here 🚀🔴',
+      likes: 1567,
+      comments: 892,
+      time: '1d'
+    }
+  ];
+
+  const newsItems = [
+    { title: 'Breaking News', subtitle: 'AI revolution continues', avatar: '📰' },
+    { title: 'Tech Updates', subtitle: 'New framework released', avatar: '💻' },
+    { title: 'Market Watch', subtitle: 'Crypto surge today', avatar: '📈' },
+    { title: 'Global Events', subtitle: 'Climate summit begins', avatar: '🌍' },
+    { title: 'Sports', subtitle: 'Championship finals', avatar: '⚽' },
+    { title: 'Entertainment', subtitle: 'New movie premieres', avatar: '🎬' },
+    { title: 'Science', subtitle: 'Mars mission update', avatar: '🚀' },
+    { title: 'Health', subtitle: 'Wellness trends rising', avatar: '🏥' }
+  ];
+
   return (
-    <div className="min-h-screen bg-black text-white flex">
-      {/* Left Sidebar */}
-      <div className="w-64 p-4 border-r border-gray-800 fixed h-full">
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold">Thrynk</h1>
-        </div>
-        
-        <div className="mb-6">
-          <div className="flex items-center bg-gray-900 rounded-full px-4 py-2">
-            <Search size={20} className="text-gray-500 mr-3" />
-            <input 
-              type="text" 
-              placeholder="Search" 
-              className="bg-transparent outline-none flex-1"
-            />
-          </div>
-        </div>
-        
-        <nav className="space-y-2 mb-8">
-          <div className="flex items-center space-x-3 p-3 hover:bg-gray-900 rounded-full cursor-pointer">
-            <Home size={24} />
-            <span className="text-xl">Home</span>
-          </div>
-          <div className="flex items-center space-x-3 p-3 hover:bg-gray-900 rounded-full cursor-pointer">
-            <Bell size={24} />
-            <span className="text-xl">Notifications</span>
-          </div>
-          <div className="flex items-center space-x-3 p-3 hover:bg-gray-900 rounded-full cursor-pointer">
-            <Mail size={24} />
-            <span className="text-xl">Messages</span>
-          </div>
-          {/* <div className="flex items-center space-x-3 p-3 hover:bg-gray-900 rounded-full cursor-pointer">
-            
-            <span className="text-xl">Thrynk's Pick</span>
-          </div> */}
-          <div className="flex items-center space-x-3 p-3 hover:bg-gray-900 rounded-full cursor-pointer">
-            <Bookmark size={24} />
-            <span className="text-xl ">Bookmarks</span>
-          </div>
-          <div className="flex items-center space-x-3 p-3 hover:bg-gray-900 rounded-full cursor-pointer">
-            <User size={24} />
-            <span className="text-xl">Profile</span>
-          </div>
-        </nav>
-        
-        <button className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full mb-8">
-          + Create
-        </button>
-        
-        <div className="mt-auto">
-          <div className="text-xl mb-2 ml-12">More</div>
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
-              <span className="font-bold">M</span>
+    <div className="h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex overflow-hidden">
+      {/* Left Sidebar - Fixed */}
+      <div className="w-80 bg-white/80 backdrop-blur-xl border-r border-slate-200/60 shadow-xl flex-shrink-0">
+        <div className="p-8 h-full flex flex-col">
+          <h1 className="text-3xl font-bold text-slate-800 mb-8">Thrynk</h1>
+          
+          <nav className="space-y-3 flex-1">
+            {sidebarItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => setActiveSection(item.name)}
+                className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-200 ${
+                  activeSection === item.name
+                    ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg transform scale-[1.02]'
+                    : 'hover:bg-slate-100 text-slate-600 hover:text-slate-800'
+                }`}
+              >
+                <item.icon size={22} />
+                <span className="font-medium">{item.name}</span>
+              </button>
+            ))}
+          </nav>
+
+          <button className="w-full mt-8 bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-4 px-6 rounded-2xl font-semibold flex items-center justify-center gap-2 hover:shadow-lg transform hover:scale-105 transition-all duration-200">
+            <Plus size={20} />
+            Create
+          </button>
+
+          <div className="mt-8 flex items-center gap-3 p-4 rounded-2xl bg-slate-50 hover:bg-slate-100 transition-colors cursor-pointer">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-r from-pink-400 to-purple-500 flex items-center justify-center text-white font-bold text-lg">
+              A
             </div>
             <div>
-              <div className="font-bold">Manan</div>
-              <div className="text-gray-500">@Manan</div>
+              <p className="font-semibold text-slate-800">Aniket Kumar</p>
+              <p className="text-slate-500 text-sm">@aniket2000</p>
             </div>
-            <MoreHorizontal size={20} className="ml-auto" />
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 ml-64">
-        <div className="flex">
-          {/* Feed */}
-          <div className="flex-1 max-w-2xl border-r border-gray-800">
-            {/* Header */}
-            <div className="sticky top-0 bg-black/80 backdrop-blur border-b border-gray-800">
-              <div className="flex">
-                <button 
-                  onClick={() => setActiveTab('For You')}
-                  className={`flex-1 p-4 text-center hover:bg-gray-900 ${activeTab === 'For You' ? 'border-b-2 border-blue-500 font-bold' : ''}`}
-                >
-                  For You
-                </button>
-                <button 
-                  onClick={() => setActiveTab('Following')}
-                  className={`flex-1 p-4 text-center hover:bg-gray-900 ${activeTab === 'Following' ? 'border-b-2 border-blue-500 font-bold' : ''}`}
-                >
-                  Following
-                </button>
-                <button 
-                  onClick={() => setActiveTab('Blogs')}
-                  className={`flex-1 p-4 text-center hover:bg-gray-900 ${activeTab === 'Blogs' ? 'border-b-2 border-blue-500 font-bold' : ''}`}
-                >
-                  Blogs
-                </button>
-                <button 
-                  onClick={() => setActiveTab('Pinned')}
-                  className={`flex-1 p-4 text-center hover:bg-gray-900 ${activeTab === 'Pinned' ? 'border-b-2 border-blue-500 font-bold' : ''}`}
-                >
-                  📌 Pinned
-                </button>
+      {/* Right Side Content - Scrollable (Middle + Right Sidebar) */}
+      <div className="flex-1 flex overflow-y-auto">
+        {/* Feed */}
+        <div className="flex-1 max-w-2xl">
+          {/* Header */}
+          <div className="bg-white/80 backdrop-blur-xl border-b border-slate-200/60 p-6 sticky top-0 z-10">
+            <div className="flex items-center justify-between mb-6">
+              <div className="relative flex-1 max-w-md">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400" size={20} />
+                <input
+                  type="text"
+                  placeholder="Search Thrynk..."
+                  className="w-full pl-12 pr-4 py-3 bg-slate-100 rounded-full border-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                />
               </div>
             </div>
 
-            {/* Tweet Composer */}
-            <div className="border-b border-gray-800 p-4">
-              <div className="flex space-x-3">
-                <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                  <span className="font-bold">M</span>
+            {/* Post Input */}
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+              <div className="flex gap-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold">
+                  M
                 </div>
                 <div className="flex-1">
-                  <div className="flex items-center mb-2">
-                    <select className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
-                      <option>🌍 Post to Public</option>
-                    </select>
-                  </div>
-                  <textarea 
-                    placeholder="What's on your mind ?" 
-                    className="w-full bg-transparent text-xl placeholder-gray-500 resize-none outline-none mb-4"
-                    rows="3"
-                    onFocus={() => setIsComposerFocused(true)}
-                    onBlur={(e) => {
-                      // Only hide if clicking outside the composer area
-                      if (!e.relatedTarget || !e.currentTarget.parentElement.contains(e.relatedTarget)) {
-                        setIsComposerFocused(false);
-                      }
-                    }}
+                  <input
+                    type="text"
+                    placeholder="What's on your Mind? 🤔"
+                    className="w-full text-lg border-none outline-none placeholder-slate-400"
+                    onFocus={() => setIsPostInputFocused(true)}
+                    onBlur={() => setIsPostInputFocused(false)}
                   />
-                  {isComposerFocused && (
-                    <div className="flex items-center justify-between">
-                      <div className="flex space-x-4 text-blue-400">
-                        <button>😊</button>
-                        <button>📷</button>
-                        <button>🔗</button>
-                        <button>💡</button>
+                  
+                  {/* Post Actions - Show when focused */}
+                  {isPostInputFocused && (
+                    <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-100">
+                      <div className="flex gap-4">
+                        <button className="flex items-center gap-2 text-blue-500 hover:bg-blue-50 px-3 py-2 rounded-lg transition-colors">
+                          <Image size={20} />
+                          <span className="text-sm font-medium">Photo</span>
+                        </button>
+                        <button className="flex items-center gap-2 text-yellow-500 hover:bg-yellow-50 px-3 py-2 rounded-lg transition-colors">
+                          <Smile size={20} />
+                          <span className="text-sm font-medium">Emoji</span>
+                        </button>
+                        <button className="flex items-center gap-2 text-red-500 hover:bg-red-50 px-3 py-2 rounded-lg transition-colors">
+                          <MapPin size={20} />
+                          <span className="text-sm font-medium">Location</span>
+                        </button>
+                        <button className="flex items-center gap-2 text-purple-500 hover:bg-purple-50 px-3 py-2 rounded-lg transition-colors">
+                          <Calendar size={20} />
+                          <span className="text-sm font-medium">Schedule</span>
+                        </button>
                       </div>
-                      <button className="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded-full font-bold">
+                      <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-full font-medium hover:shadow-lg transition-all">
                         Post
                       </button>
                     </div>
@@ -147,117 +216,130 @@ const TwitterClone = () => {
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Sample Post */}
-            <div className="border-b border-gray-800 p-4">
-              <div className="flex space-x-3">
-                <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center">
-                  <span className="font-bold">S</span>
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center space-x-2 mb-1">
-                    <span className="font-bold">Suzuki</span>
-                    <span className="text-blue-400">Follow</span>
-                    <span className="text-gray-500">@suzuki39 · 39M</span>
-                    <MoreHorizontal size={16} className="ml-auto text-gray-500" />
-                  </div>
-                  
-                  {/* Post Content - Drawing */}
-                  <div className="mb-3">
-                    <div className="bg-gray-900 rounded-2xl p-6 mb-3">
-                      <div className="flex items-center justify-center h-64">
-                        {/* Simple drawing representation */}
-                        <div className="text-center">
-                          <div className="text-6xl mb-4">☀️</div>
-                          <div className="text-4xl mb-4">⛰️🏠⛰️</div>
-                          <div className="text-3xl mb-2">🌳 👤 🌳</div>
-                          <div className="text-2xl">🌸🌸🌸</div>
-                        </div>
+          {/* Posts */}
+          <div className="p-6 space-y-6">
+            {posts.map((post) => (
+              <div key={post.id} className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="flex gap-4">
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-r from-pink-400 to-orange-400 flex items-center justify-center text-2xl">
+                      {post.user.avatar}
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-bold text-slate-800 text-lg">{post.user.name}</h3>
+                        {post.user.verified && (
+                          <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                            <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                        )}
                       </div>
+                      <p className="text-slate-500">{post.user.handle} • {post.time}</p>
                     </div>
                   </div>
-                  
-                  <div className="flex items-center justify-between text-gray-500 max-w-md">
-                    <div className="flex items-center space-x-2 hover:text-blue-400 cursor-pointer">
-                      <MessageCircle size={18} />
-                      <span>26</span>
-                    </div>
-                    <div className="flex items-center space-x-2 hover:text-green-400 cursor-pointer">
-                      <Repeat2 size={18} />
-                      <span>38</span>
-                    </div>
-                    <div className="flex items-center space-x-2 hover:text-red-400 cursor-pointer">
+                  <button className="text-slate-400 hover:text-slate-600 p-2">
+                    <MoreHorizontal size={20} />
+                  </button>
+                </div>
+
+                <p className="text-slate-700 mb-6 text-lg leading-relaxed">{post.content}</p>
+                
+                {post.image && (
+                  <div className="mb-6 rounded-2xl bg-gradient-to-br from-yellow-100 to-orange-100 p-8 flex items-center justify-center">
+                    <span className="text-6xl">{post.image}</span>
+                  </div>
+                )}
+
+                <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                  <button className="flex items-center gap-2 text-slate-500 hover:text-red-500 transition-colors group">
+                    <div className="p-2 rounded-full group-hover:bg-red-50">
                       <Heart size={18} />
-                      <span>012</span>
                     </div>
-                    <div className="flex items-center space-x-2 hover:text-blue-400 cursor-pointer">
+                    <span className="font-medium">{post.likes}</span>
+                  </button>
+                  <button className="flex items-center gap-2 text-slate-500 hover:text-blue-500 transition-colors group">
+                    <div className="p-2 rounded-full group-hover:bg-blue-50">
+                      <MessageCircle size={18} />
+                    </div>
+                    <span className="font-medium">{post.comments}</span>
+                  </button>
+                  <button className="flex items-center gap-2 text-slate-500 hover:text-green-500 transition-colors group">
+                    <div className="p-2 rounded-full group-hover:bg-green-50">
+                      <Repeat2 size={18} />
+                    </div>
+                  </button>
+                  <button className="flex items-center gap-2 text-slate-500 hover:text-purple-500 transition-colors group">
+                    <div className="p-2 rounded-full group-hover:bg-purple-50">
                       <Share size={18} />
                     </div>
-                  </div>
+                  </button>
                 </div>
               </div>
+            ))}
+          </div>
+
+          {/* Tabs - At bottom of middle section */}
+          <div className="bg-white/80 backdrop-blur-xl border-t border-slate-200/60 px-6 sticky bottom-0">
+            <div className="flex">
+              {[
+                { key: 'forYou', label: 'For You', icon: TrendingUp },
+                { key: 'following', label: 'Following', icon: Heart },
+                { key: 'blogs', label: 'Blogs', icon: MessageSquare }
+              ].map((tab) => (
+                <button
+                  key={tab.key}
+                  onClick={() => setActiveTab(tab.key)}
+                  className={`flex-1 flex items-center justify-center gap-2 py-4 border-t-2 transition-all duration-200 ${
+                    activeTab === tab.key
+                      ? 'border-blue-500 text-blue-600 bg-blue-50/50'
+                      : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'
+                  }`}
+                >
+                  <tab.icon size={18} />
+                  <span className="font-medium">{tab.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Right Sidebar */}
+        <div className="w-80 p-6 space-y-6">
+          {/* Thrynk's Pick */}
+          <div className="bg-gradient-to-br from-emerald-100 to-teal-100 rounded-3xl p-6 border border-emerald-200">
+            <h3 className="font-bold text-emerald-800 mb-2">Thrynk's Pick</h3>
+            <p className="text-emerald-700 font-medium">We have to Do it!</p>
+          </div>
+
+          {/* What's Rising */}
+          <div className="bg-gradient-to-br from-blue-100 to-indigo-100 rounded-3xl p-6 border border-blue-200">
+            <h3 className="font-bold text-blue-800 mb-4">What's Rising</h3>
+            <div className="space-y-2">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="h-2 bg-blue-200 rounded-full"></div>
+              ))}
             </div>
           </div>
 
-          {/* Right Sidebar */}
-          <div className="w-80 p-4">
-            {/* You May Know */}
-            <div className="bg-gray-900 rounded-2xl p-4 mb-4">
-              <h3 className="text-xl font-bold mb-3">You May Know</h3>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-purple-500 rounded-full"></div>
-                    <div>
-                      <div className="font-bold">User 1</div>
-                      <div className="text-gray-500 text-sm">@user1</div>
-                    </div>
+          {/* Today's News - More News Added */}
+          <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
+            <h3 className="font-bold text-slate-800 mb-6">Today's News</h3>
+            <div className="space-y-4">
+              {newsItems.map((item, index) => (
+                <div key={index} className="flex items-center gap-3 p-3 rounded-2xl hover:bg-slate-50 transition-colors cursor-pointer">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center text-lg">
+                    {item.avatar}
                   </div>
-                  <button className="bg-white text-black px-4 py-1 rounded-full font-bold hover:bg-gray-200">
-                    Follow
-                  </button>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-pink-500 rounded-full"></div>
-                    <div>
-                      <div className="font-bold">User 2</div>
-                      <div className="text-gray-500 text-sm">@user2</div>
-                    </div>
-                  </div>
-                  <button className="bg-white text-black px-4 py-1 rounded-full font-bold hover:bg-gray-200">
-                    Follow
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* What's Trending */}
-            <div className="bg-gray-900 rounded-2xl p-4">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-xl font-bold">What's Trending</h3>
-                <Settings size={18} className="text-gray-500" />
-              </div>
-              <div className="space-y-3">
-                <div>
-                  <div className="text-gray-500 text-sm"># Hashtag Trending</div>
-                  <div className="font-bold"># Artificial Intelligence</div>
-                  <div className="text-gray-500 text-sm">Trending Technology</div>
-                </div>
-                <div>
-                  <div className="text-gray-500 text-sm"># Politics Trending</div>
-                  <div className="font-bold"># Politics Election 2024</div>
-                  <div className="text-gray-500 text-sm">Trending Bangladesh</div>
-                </div>
-                <div className="mt-4 pt-3 border-t border-gray-700">
-                  <h4 className="font-bold mb-2">Today's News</h4>
-                  <div className="space-y-2 text-sm">
-                    <div>Trump is dead?</div>
-                    <div>Salman Khan Jobs Marked?</div>
-                    <div>India World #1 Kickstorm?</div>
+                  <div className="flex-1">
+                    <p className="font-semibold text-slate-800">{item.title}</p>
+                    <p className="text-slate-500 text-sm">{item.subtitle}</p>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -266,4 +348,4 @@ const TwitterClone = () => {
   );
 };
 
-export default TwitterClone;
+export default ThrynkPlatform;
