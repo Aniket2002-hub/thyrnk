@@ -1,117 +1,146 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Search, Home, Compass, Bell, MessageSquare, Bookmark, Camera, User, Plus, MoreHorizontal, Heart, MessageCircle, Repeat2, Share, TrendingUp, Image, Smile, MapPin, Calendar } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  Search,
+  Home,
+  Compass,
+  Bell,
+  MessageSquare,
+  Bookmark,
+  Camera,
+  User,
+  Plus,
+  MoreHorizontal,
+  Heart,
+  MessageCircle,
+  Repeat2,
+  Share,
+  TrendingUp,
+  Image,
+  Smile,
+  MapPin,
+  Calendar,
+} from "lucide-react";
 
 const ThrynkPlatform = () => {
-  const [activeTab, setActiveTab] = useState('forYou');
-  const [activeSection, setActiveSection] = useState('Home');
+  const [activeTab, setActiveTab] = useState("forYou");
+  const [activeSection, setActiveSection] = useState("Home");
   const [isPostInputFocused, setIsPostInputFocused] = useState(false);
 
   const sidebarItems = [
-    { name: 'Home', icon: Home, active: true },
-    { name: 'Explore', icon: Compass },
-    { name: 'Notification', icon: Bell },
-    { name: 'Messages', icon: MessageSquare },
-    { name: 'Bookmarks', icon: Bookmark },
+    { name: "Home", icon: Home, active: true },
+    { name: "Explore", icon: Compass },
+    { name: "Notification", icon: Bell },
+    { name: "Messages", icon: MessageSquare },
+    { name: "Bookmarks", icon: Bookmark },
     { name: "Thrynk's Pick", icon: Camera },
-    { name: 'Profile', icon: User },
-    { name: 'More', icon: MoreHorizontal }
+    { name: "Profile", icon: User },
+    { name: "More", icon: MoreHorizontal },
   ];
 
   const posts = [
     {
       id: 1,
       user: {
-        name: 'Nitya Shri',
-        handle: '@nityeshri',
-        avatar: '👩‍💻',
-        verified: true
+        name: "Nitya Shri",
+        handle: "@nityeshri",
+        avatar: "👩‍💻",
+        verified: true,
       },
-      content: 'Just baked a fresh batch chocolate chip cookies 🍪',
-      image: '🍪',
+      content: "Just baked a fresh batch chocolate chip cookies 🍪",
+      image: "🍪",
       likes: 13,
       comments: 1816,
-      time: '2h'
+      time: "2h",
     },
     {
       id: 2,
       user: {
-        name: 'Alex Chen',
-        handle: '@alextech',
-        avatar: '👨‍💼',
-        verified: true
+        name: "Alex Chen",
+        handle: "@alextech",
+        avatar: "👨‍💼",
+        verified: true,
       },
-      content: 'Working on an exciting new AI project! The future of technology is here and it\'s absolutely mind-blowing 🚀✨',
+      content:
+        "Working on an exciting new AI project! The future of technology is here and it's absolutely mind-blowing 🚀✨",
       likes: 247,
       comments: 892,
-      time: '4h'
+      time: "4h",
     },
     {
       id: 3,
       user: {
-        name: 'Sarah Wilson',
-        handle: '@sarahcreates',
-        avatar: '👩‍🎨',
-        verified: false
+        name: "Sarah Wilson",
+        handle: "@sarahcreates",
+        avatar: "👩‍🎨",
+        verified: false,
       },
-      content: 'Just finished designing a new mobile app interface. Clean, minimal, and user-friendly! What do you think? 📱',
-      image: '🎨',
+      content:
+        "Just finished designing a new mobile app interface. Clean, minimal, and user-friendly! What do you think? 📱",
+      image: "🎨",
       likes: 156,
       comments: 423,
-      time: '6h'
+      time: "6h",
     },
     {
       id: 4,
       user: {
-        name: 'David Kim',
-        handle: '@daviddev',
-        avatar: '👨‍💻',
-        verified: true
+        name: "David Kim",
+        handle: "@daviddev",
+        avatar: "👨‍💻",
+        verified: true,
       },
-      content: 'Breaking: New JavaScript framework released! This could change everything we know about web development 🔥',
+      content:
+        "Breaking: New JavaScript framework released! This could change everything we know about web development 🔥",
       likes: 892,
       comments: 1234,
-      time: '8h'
+      time: "8h",
     },
     {
       id: 5,
       user: {
-        name: 'Emma Rodriguez',
-        handle: '@emmacreates',
-        avatar: '👩‍🎨',
-        verified: false
+        name: "Emma Rodriguez",
+        handle: "@emmacreates",
+        avatar: "👩‍🎨",
+        verified: false,
       },
-      content: 'Just launched my new portfolio website! Took me 3 months to perfect every detail. Check it out! ✨',
-      image: '💻', 
+      content:
+        "Just launched my new portfolio website! Took me 3 months to perfect every detail. Check it out! ✨",
+      image: "💻",
       likes: 445,
       comments: 167,
-      time: '12h'
+      time: "12h",
     },
     {
       id: 6,
       user: {
-        name: 'Michael Johnson',
-        handle: '@mikej',
-        avatar: '👨‍🚀',
-        verified: true
+        name: "Michael Johnson",
+        handle: "@mikej",
+        avatar: "👨‍🚀",
+        verified: true,
       },
-      content: 'Space exploration update: New Mars rover footage is absolutely stunning! The future is here 🚀🔴',
+      content:
+        "Space exploration update: New Mars rover footage is absolutely stunning! The future is here 🚀🔴",
       likes: 1567,
       comments: 892,
-      time: '1d'
-    }
+      time: "1d",
+    },
   ];
 
   const newsItems = [
-    { title: 'Breaking News', subtitle: 'AI revolution continues', avatar: '📰' },
-    { title: 'Tech Updates', subtitle: 'New framework released', avatar: '💻' },
-    { title: 'Market Watch', subtitle: 'Crypto surge today', avatar: '📈' },
-    { title: 'Global Events', subtitle: 'Climate summit begins', avatar: '🌍' },
-    { title: 'Sports', subtitle: 'Championship finals', avatar: '⚽' },
-    { title: 'Entertainment', subtitle: 'New movie premieres', avatar: '🎬' },
-    { title: 'Science', subtitle: 'Mars mission update', avatar: '🚀' },
-    { title: 'Health', subtitle: 'Wellness trends rising', avatar: '🏥' }
+    {
+      title: "Breaking News",
+      subtitle: "AI revolution continues",
+      avatar: "📰",
+    },
+    { title: "Tech Updates", subtitle: "New framework released", avatar: "💻" },
+    { title: "Market Watch", subtitle: "Crypto surge today", avatar: "📈" },
+    { title: "Global Events", subtitle: "Climate summit begins", avatar: "🌍" },
+    { title: "Sports", subtitle: "Championship finals", avatar: "⚽" },
+    { title: "Entertainment", subtitle: "New movie premieres", avatar: "🎬" },
+    { title: "Science", subtitle: "Mars mission update", avatar: "🚀" },
+    { title: "Health", subtitle: "Wellness trends rising", avatar: "🏥" },
   ];
 
   return (
@@ -120,7 +149,7 @@ const ThrynkPlatform = () => {
       <div className="w-80 bg-white/80 backdrop-blur-xl border-r border-slate-200/60 shadow-xl flex-shrink-0">
         <div className="p-8 h-full flex flex-col">
           <h1 className="text-3xl font-bold text-slate-800 mb-8">Thrynk</h1>
-          
+
           <nav className="space-y-3 flex-1">
             {sidebarItems.map((item) => (
               <button
@@ -128,8 +157,8 @@ const ThrynkPlatform = () => {
                 onClick={() => setActiveSection(item.name)}
                 className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-200 ${
                   activeSection === item.name
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg transform scale-[1.02]'
-                    : 'hover:bg-slate-100 text-slate-600 hover:text-slate-800'
+                    ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg transform scale-[1.02]"
+                    : "hover:bg-slate-100 text-slate-600 hover:text-slate-800"
                 }`}
               >
                 <item.icon size={22} />
@@ -163,7 +192,10 @@ const ThrynkPlatform = () => {
           <div className="bg-white/80 backdrop-blur-xl border-b border-slate-200/60 p-6 sticky top-0 z-10">
             <div className="flex items-center justify-between mb-6">
               <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400" size={20} />
+                <Search
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"
+                  size={20}
+                />
                 <input
                   type="text"
                   placeholder="Search Thrynk..."
@@ -186,7 +218,7 @@ const ThrynkPlatform = () => {
                     onFocus={() => setIsPostInputFocused(true)}
                     onBlur={() => setIsPostInputFocused(false)}
                   />
-                  
+
                   {/* Post Actions - Show when focused */}
                   {isPostInputFocused && (
                     <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-100">
@@ -218,85 +250,228 @@ const ThrynkPlatform = () => {
             </div>
           </div>
 
-          {/* Posts */}
+          {/* Posts Section */}
           <div className="p-6 space-y-6">
-            {posts.map((post) => (
-              <div key={post.id} className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300">
-                <div className="flex justify-between items-start mb-6">
-                  <div className="flex gap-4">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-r from-pink-400 to-orange-400 flex items-center justify-center text-2xl">
-                      {post.user.avatar}
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-bold text-slate-800 text-lg">{post.user.name}</h3>
-                        {post.user.verified && (
-                          <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
-                            <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                            </svg>
+            {activeTab === "forYou" && (
+              <>
+                {posts.map((post) => (
+                  <div
+                    key={post.id}
+                    className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300"
+                  >
+                    {/* Post content (same as before) */}
+                    <div className="flex justify-between items-start mb-6">
+                      <div className="flex gap-4">
+                        <div className="w-14 h-14 rounded-full bg-gradient-to-r from-pink-400 to-orange-400 flex items-center justify-center text-2xl">
+                          {post.user.avatar}
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <h3 className="font-bold text-slate-800 text-lg">
+                              {post.user.name}
+                            </h3>
+                            {post.user.verified && (
+                              <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                                <svg
+                                  className="w-3 h-3 text-white"
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                              </div>
+                            )}
                           </div>
-                        )}
+                          <p className="text-slate-500">
+                            {post.user.handle} • {post.time}
+                          </p>
+                        </div>
                       </div>
-                      <p className="text-slate-500">{post.user.handle} • {post.time}</p>
+                      <button className="text-slate-400 hover:text-slate-600 p-2">
+                        <MoreHorizontal size={20} />
+                      </button>
+                    </div>
+
+                    <p className="text-slate-700 mb-6 text-lg leading-relaxed">
+                      {post.content}
+                    </p>
+
+                    {post.image && (
+                      <div className="mb-6 rounded-2xl bg-gradient-to-br from-yellow-100 to-orange-100 p-8 flex items-center justify-center">
+                        <span className="text-6xl">{post.image}</span>
+                      </div>
+                    )}
+
+                    <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                      <button className="flex items-center gap-2 text-slate-500 hover:text-red-500 transition-colors group">
+                        <div className="p-2 rounded-full group-hover:bg-red-50">
+                          <Heart size={18} />
+                        </div>
+                        <span className="font-medium">{post.likes}</span>
+                      </button>
+                      <button className="flex items-center gap-2 text-slate-500 hover:text-blue-500 transition-colors group">
+                        <div className="p-2 rounded-full group-hover:bg-blue-50">
+                          <MessageCircle size={18} />
+                        </div>
+                        <span className="font-medium">{post.comments}</span>
+                      </button>
+                      <button className="flex items-center gap-2 text-slate-500 hover:text-green-500 transition-colors group">
+                        <div className="p-2 rounded-full group-hover:bg-green-50">
+                          <Repeat2 size={18} />
+                        </div>
+                      </button>
+                      <button className="flex items-center gap-2 text-slate-500 hover:text-purple-500 transition-colors group">
+                        <div className="p-2 rounded-full group-hover:bg-purple-50">
+                          <Share size={18} />
+                        </div>
+                      </button>
                     </div>
                   </div>
-                  <button className="text-slate-400 hover:text-slate-600 p-2">
-                    <MoreHorizontal size={20} />
-                  </button>
-                </div>
+                ))}
+              </>
+            )}
 
-                <p className="text-slate-700 mb-6 text-lg leading-relaxed">{post.content}</p>
-                
-                {post.image && (
-                  <div className="mb-6 rounded-2xl bg-gradient-to-br from-yellow-100 to-orange-100 p-8 flex items-center justify-center">
-                    <span className="text-6xl">{post.image}</span>
+            {activeTab === "following" && (
+              <>
+                {activeTab === "following" && (
+                  <div className="bg-white rounded-3xl px-6 py-4 shadow-sm border border-slate-100 text-center">
+                    <div className="flex gap-6 overflow-x-auto no-scrollbar py-2">
+                      {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
+                        <div
+                          key={i}
+                          className="flex flex-col items-center flex-shrink-0"
+                        >
+                         
+                          <div className="w-16 h-16 rounded-full border-2 border-blue-500 p-1 cursor-pointer hover:scale-105 transition-transform duration-200">
+                            <img
+                              src={`https://i.pravatar.cc/150?img=${i}`} 
+                              alt={`User ${i}`}
+                              className="w-full h-full rounded-full object-cover"
+                            />
+                          </div>
+                          
+                          <span className="mt-2 text-xs text-slate-600 truncate w-16 text-center">
+                            User {i}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
 
-                <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                  <button className="flex items-center gap-2 text-slate-500 hover:text-red-500 transition-colors group">
-                    <div className="p-2 rounded-full group-hover:bg-red-50">
-                      <Heart size={18} />
+                {posts.map((post) => (
+                  <div
+                    key={post.id}
+                    className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300"
+                  >
+                    {/* Post content (same as before) */}
+                    <div className="flex justify-between items-start mb-6">
+                      <div className="flex gap-4">
+                        <div className="w-14 h-14 rounded-full bg-gradient-to-r from-pink-400 to-orange-400 flex items-center justify-center text-2xl">
+                          {post.user.avatar}
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <h3 className="font-bold text-slate-800 text-lg">
+                              {post.user.name}
+                            </h3>
+                            {post.user.verified && (
+                              <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                                <svg
+                                  className="w-3 h-3 text-white"
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                              </div>
+                            )}
+                          </div>
+                          <p className="text-slate-500">
+                            {post.user.handle} • {post.time}
+                          </p>
+                        </div>
+                      </div>
+                      <button className="text-slate-400 hover:text-slate-600 p-2">
+                        <MoreHorizontal size={20} />
+                      </button>
                     </div>
-                    <span className="font-medium">{post.likes}</span>
-                  </button>
-                  <button className="flex items-center gap-2 text-slate-500 hover:text-blue-500 transition-colors group">
-                    <div className="p-2 rounded-full group-hover:bg-blue-50">
-                      <MessageCircle size={18} />
+
+                    <p className="text-slate-700 mb-6 text-lg leading-relaxed">
+                      {post.content}
+                    </p>
+
+                    {post.image && (
+                      <div className="mb-6 rounded-2xl bg-gradient-to-br from-yellow-100 to-orange-100 p-8 flex items-center justify-center">
+                        <span className="text-6xl">{post.image}</span>
+                      </div>
+                    )}
+
+                    <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                      <button className="flex items-center gap-2 text-slate-500 hover:text-red-500 transition-colors group">
+                        <div className="p-2 rounded-full group-hover:bg-red-50">
+                          <Heart size={18} />
+                        </div>
+                        <span className="font-medium">{post.likes}</span>
+                      </button>
+                      <button className="flex items-center gap-2 text-slate-500 hover:text-blue-500 transition-colors group">
+                        <div className="p-2 rounded-full group-hover:bg-blue-50">
+                          <MessageCircle size={18} />
+                        </div>
+                        <span className="font-medium">{post.comments}</span>
+                      </button>
+                      <button className="flex items-center gap-2 text-slate-500 hover:text-green-500 transition-colors group">
+                        <div className="p-2 rounded-full group-hover:bg-green-50">
+                          <Repeat2 size={18} />
+                        </div>
+                      </button>
+                      <button className="flex items-center gap-2 text-slate-500 hover:text-purple-500 transition-colors group">
+                        <div className="p-2 rounded-full group-hover:bg-purple-50">
+                          <Share size={18} />
+                        </div>
+                      </button>
                     </div>
-                    <span className="font-medium">{post.comments}</span>
-                  </button>
-                  <button className="flex items-center gap-2 text-slate-500 hover:text-green-500 transition-colors group">
-                    <div className="p-2 rounded-full group-hover:bg-green-50">
-                      <Repeat2 size={18} />
-                    </div>
-                  </button>
-                  <button className="flex items-center gap-2 text-slate-500 hover:text-purple-500 transition-colors group">
-                    <div className="p-2 rounded-full group-hover:bg-purple-50">
-                      <Share size={18} />
-                    </div>
-                  </button>
-                </div>
+                  </div>
+                ))}
+              </>
+            )}
+
+            {activeTab === "blogs" && (
+              <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 text-center text-slate-600">
+                <h2 className="text-xl font-bold mb-4">Blogs</h2>
+                <p>Read trending blogs 📖</p>
               </div>
-            ))}
+            )}
           </div>
 
           {/* Tabs - At bottom of middle section */}
-          <div className="bg-white/80 backdrop-blur-xl border-t border-slate-200/60 px-6 sticky bottom-0">
+          <div className="bg-white/80 backdrop-blur-xl border-t border-slate-200/60 px-6  bottom-0 fixed min-w-2xl z-10">
             <div className="flex">
               {[
-                { key: 'forYou', label: 'For You', icon: TrendingUp },
-                { key: 'following', label: 'Following', icon: Heart },
-                { key: 'blogs', label: 'Blogs', icon: MessageSquare }
+                { key: "forYou", label: "For You", icon: TrendingUp },
+                {
+                  key: "following",
+                  label: "Following",
+                  icon: Heart,
+                  href: "/following",
+                },
+                { key: "blogs", label: "Blogs", icon: MessageSquare },
               ].map((tab) => (
                 <button
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
                   className={`flex-1 flex items-center justify-center gap-2 py-4 border-t-2 transition-all duration-200 ${
                     activeTab === tab.key
-                      ? 'border-blue-500 text-blue-600 bg-blue-50/50'
-                      : 'border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50'
+                      ? "border-blue-500 text-blue-600 bg-blue-50/50"
+                      : "border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50"
                   }`}
                 >
                   <tab.icon size={18} />
@@ -330,7 +505,10 @@ const ThrynkPlatform = () => {
             <h3 className="font-bold text-slate-800 mb-6">Today's News</h3>
             <div className="space-y-4">
               {newsItems.map((item, index) => (
-                <div key={index} className="flex items-center gap-3 p-3 rounded-2xl hover:bg-slate-50 transition-colors cursor-pointer">
+                <div
+                  key={index}
+                  className="flex items-center gap-3 p-3 rounded-2xl hover:bg-slate-50 transition-colors cursor-pointer"
+                >
                   <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center text-lg">
                     {item.avatar}
                   </div>
