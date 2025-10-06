@@ -235,11 +235,11 @@ export default function Page() {
         {/** Story Section... */}
 
         <div>
-          <div className="flex gap-6 overflow-x-auto no-scrollbar p-4 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 justify-between ">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].slice(0, 5).map((i) => (
+          <div className="flex gap-6 overflow-x-auto no-scrollbar p-4 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 justify-between px-6">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12].map((i) => (
               <div
                 key={i}
-                className="flex flex-col items-center flex-shrink-0 px-4"
+                className="flex flex-col items-center flex-shrink-0 "
               >
                 {/* Circle with image */}
                 <div className="w-20 h-20 rounded-full border-2 border-pink-500 p-1 cursor-pointer hover:scale-105 transition-transform duration-200">
