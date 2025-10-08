@@ -137,20 +137,20 @@ const ThrynkPlatform = () => {
     { key: "news", label: "News",  link: "/news" },
   ];
 
-  const newsItems = [
-    {
-      title: "Breaking News",
-      subtitle: "AI revolution continues",
-      avatar: "📰",
-    },
-    { title: "Tech Updates", subtitle: "New framework released", avatar: "💻" },
-    { title: "Market Watch", subtitle: "Crypto surge today", avatar: "📈" },
-    { title: "Global Events", subtitle: "Climate summit begins", avatar: "🌍" },
-    { title: "Sports", subtitle: "Championship finals", avatar: "⚽" },
-    { title: "Entertainment", subtitle: "New movie premieres", avatar: "🎬" },
-    { title: "Science", subtitle: "Mars mission update", avatar: "🚀" },
-    { title: "Health", subtitle: "Wellness trends rising", avatar: "🏥" },
-  ];
+  // const newsItems = [
+  //   {
+  //     title: "Breaking News",
+  //     subtitle: "AI revolution continues",
+  //     avatar: "📰",
+  //   },
+  //   { title: "Tech Updates", subtitle: "New framework released", avatar: "💻" },
+  //   { title: "Market Watch", subtitle: "Crypto surge today", avatar: "📈" },
+  //   { title: "Global Events", subtitle: "Climate summit begins", avatar: "🌍" },
+  //   { title: "Sports", subtitle: "Championship finals", avatar: "⚽" },
+  //   { title: "Entertainment", subtitle: "New movie premieres", avatar: "🎬" },
+  //   { title: "Science", subtitle: "Mars mission update", avatar: "🚀" },
+  //   { title: "Health", subtitle: "Wellness trends rising", avatar: "🏥" },
+  // ];
 
   return (
     <div className="h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex overflow-hidden">
@@ -345,7 +345,7 @@ const ThrynkPlatform = () => {
           </div>
 
           {/* Today's News - More News Added */}
-          <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
+          {/* <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
             <h3 className="font-bold text-slate-800 mb-6">Todays News</h3>
             <div className="space-y-4">
               {newsItems.map((item, index) => (
@@ -363,7 +363,7 @@ const ThrynkPlatform = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
