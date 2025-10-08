@@ -24,15 +24,17 @@ import {
   Calendar,
 } from "lucide-react";
 import LeftSideBar from "./(components)/LeftSideBar";
+import RightSideBar from "./(components)/RightSideBar";
+import Explore from "./(components)/explore/page";
+
 
 const ThrynkPlatform = () => {
   const [activeTab, setActiveTab] = useState("forYou");
-  const [activeSection, setActiveSection] = useState("Home");
   const [isPostInputFocused, setIsPostInputFocused] = useState(false);
 
   const sidebarItems = [
     { name: "Home", icon: Home, active: true },
-    { name: "Explore", icon: Compass },
+    { name: "Explore", icon: Compass, link: "/explore" , active: false },
     { name: "Notification", icon: Bell },
     { name: "Messages", icon: MessageSquare },
     { name: "Bookmarks", icon: Bookmark },
@@ -130,26 +132,11 @@ const ThrynkPlatform = () => {
     },
   ];
 
-   const tabs = [
-    { key: "forYou", label: "For You", icon: TrendingUp, link: "#" },
-    { key: "following", label: "Following", icon: Heart, link: "#" },
+  const tabs = [
+    { key: "forYou", label: "For You", icon: TrendingUp, link: "/" },
+    { key: "following", label: "Following", icon: Heart, link: "/following" },
     { key: "blogs", label: "Blogs", icon: MessageSquare, link: "/blogs" },
-    { key: "news", label: "News",  link: "/news" },
-  ];
-
-  const newsItems = [
-    {
-      title: "Breaking News",
-      subtitle: "AI revolution continues",
-      avatar: "📰",
-    },
-    { title: "Tech Updates", subtitle: "New framework released", avatar: "💻" },
-    { title: "Market Watch", subtitle: "Crypto surge today", avatar: "📈" },
-    { title: "Global Events", subtitle: "Climate summit begins", avatar: "🌍" },
-    { title: "Sports", subtitle: "Championship finals", avatar: "⚽" },
-    { title: "Entertainment", subtitle: "New movie premieres", avatar: "🎬" },
-    { title: "Science", subtitle: "Mars mission update", avatar: "🚀" },
-    { title: "Health", subtitle: "Wellness trends rising", avatar: "🏥" },
+    { key: "news", label: "News", link: "/news" },
   ];
 
   return (
@@ -311,14 +298,15 @@ const ThrynkPlatform = () => {
                 <Link
                   key={tab.key}
                   href={tab.link}
-                  onClick={() => setActiveTab(tab.key)}
+                  onClick={() =>
+                    setActiveTab(tab.key === "forYou" ? "forYou" : tab.key)
+                  }
                   className={`flex-1 flex items-center justify-center gap-2 py-4 border-t-2 transition-all duration-200 ${
                     activeTab === tab.key
                       ? "border-blue-500 text-blue-600 bg-blue-50/50"
                       : "border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50"
                   }`}
                 >
-                  {/* <tab.icon size={18} /> */}
                   <span className="font-medium">{tab.label}</span>
                 </Link>
               ))}
@@ -365,6 +353,7 @@ const ThrynkPlatform = () => {
             </div>
           </div>
         </div>
+        <RightSideBar />
       </div>
     </div>
   );
