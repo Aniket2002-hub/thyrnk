@@ -13,7 +13,7 @@ import {
   Repeat2,
   Share,
   TrendingUp,
-  Image,
+  Image as ImageIcon,
   Smile,
   MapPin,
   Calendar,
@@ -207,7 +207,7 @@ export default function Page() {
                   <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-100">
                     <div className="flex gap-4">
                       <button className="flex items-center gap-2 text-blue-500 hover:bg-blue-50 px-3 py-2 rounded-lg transition-colors">
-                        <Image size={20} />
+                        <ImageIcon size={20} />
                         <span className="text-sm font-medium">Photo</span>
                       </button>
                       <button className="flex items-center gap-2 text-yellow-500 hover:bg-yellow-50 px-3 py-2 rounded-lg transition-colors">

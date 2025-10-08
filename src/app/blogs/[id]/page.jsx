@@ -29,7 +29,7 @@ const blogPosts = [
   },
   {
     id: 2,
-    title: "You Can't Fire Me, I AM Fire",
+  title: "You Can&apos;t Fire Me, I AM Fire",
     description: "Before phones, we stared at the flames in our hands",
     author: "Daniel Williams",
     platform: "Zenite",

@@ -21,13 +21,13 @@ export default function RightSideBar() {
       <div className="w-80 p-6 space-y-6">
         {/* Thrynk's Pick */}
         <div className="bg-gradient-to-br from-emerald-100 to-teal-100 rounded-3xl p-6 border border-emerald-200">
-          <h3 className="font-bold text-emerald-800 mb-2">Thrynks Pick</h3>
+          <h3 className="font-bold text-emerald-800 mb-2">Thrynk&apos;s Pick</h3>
           <p className="text-emerald-700 font-medium">We have to Do it!</p>
         </div>
 
         {/* What's Rising */}
         <div className="bg-gradient-to-br from-blue-100 to-indigo-100 rounded-3xl p-6 border border-blue-200">
-          <h3 className="font-bold text-blue-800 mb-4">Whats Rising</h3>
+          <h3 className="font-bold text-blue-800 mb-4">What&apos;s Rising</h3>
           <div className="space-y-2">
             {[1, 2, 3].map((i) => (
               <div key={i} className="h-2 bg-blue-200 rounded-full"></div>
@@ -37,7 +37,7 @@ export default function RightSideBar() {
 
         {/* Today's News - More News Added */}
         <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
-          <h3 className="font-bold text-slate-800 mb-6">Todays News</h3>
+          <h3 className="font-bold text-slate-800 mb-6">Today&apos;s News</h3>
           <div className="space-y-4">
             {newsItems.map((item, index) => (
               <div

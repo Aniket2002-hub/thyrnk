@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
 import {
   Search,
   Home,
@@ -9,7 +8,6 @@ import {
   Bell,
   MessageSquare,
   Bookmark,
-  Camera,
   User,
   Plus,
   MoreHorizontal,
@@ -18,27 +16,28 @@ import {
   Repeat2,
   Share,
   TrendingUp,
-  Image,
+  Image as ImageIcon,
   Smile,
   MapPin,
   Calendar,
+  Menu,
+  X,
+  Users,
+  Hash,
+  UserPlus,
 } from "lucide-react";
-import LeftSideBar from "./(components)/LeftSideBar";
-import RightSideBar from "./(components)/RightSideBar";
-import Explore from "./(components)/explore/page";
-
 
 const ThrynkPlatform = () => {
   const [activeTab, setActiveTab] = useState("forYou");
   const [isPostInputFocused, setIsPostInputFocused] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const sidebarItems = [
     { name: "Home", icon: Home, active: true },
-    { name: "Explore", icon: Compass, link: "/explore" , active: false },
+    { name: "Explore", icon: Compass, active: false },
     { name: "Notification", icon: Bell },
     { name: "Messages", icon: MessageSquare },
     { name: "Bookmarks", icon: Bookmark },
-    { name: "Thrynk's Pick", icon: Camera },
     { name: "Profile", icon: User },
     { name: "More", icon: MoreHorizontal },
   ];
@@ -133,89 +132,149 @@ const ThrynkPlatform = () => {
   ];
 
   const tabs = [
-    { key: "forYou", label: "For You", icon: TrendingUp, link: "/" },
-    { key: "following", label: "Following", icon: Heart, link: "/following" },
-    { key: "blogs", label: "Blogs", icon: MessageSquare, link: "/blogs" },
-    { key: "news", label: "News",  link: "/news" },
+    { key: "forYou", label: "For You", link: "#", icon: TrendingUp },
+    { key: "following", label: "Following", link: "#", icon: Heart },
+    { key: "blogs", label: "Blogs", link: "/blogs", icon: MessageSquare },
+    { key: "news", label: "News", link: "#", icon: Hash },
   ];
 
-  const newsItems = [
-    {
-      title: "Breaking News",
-      subtitle: "AI revolution continues",
-      avatar: "📰",
-    },
-    { title: "Tech Updates", subtitle: "New framework released", avatar: "💻" },
-    { title: "Market Watch", subtitle: "Crypto surge today", avatar: "📈" },
-    { title: "Global Events", subtitle: "Climate summit begins", avatar: "🌍" },
-    { title: "Sports", subtitle: "Championship finals", avatar: "⚽" },
-    { title: "Entertainment", subtitle: "New movie premieres", avatar: "🎬" },
-    { title: "Science", subtitle: "Mars mission update", avatar: "🚀" },
-    { title: "Health", subtitle: "Wellness trends rising", avatar: "🏥" },
+  const trending = [
+    { topic: "AI Revolution", posts: "45.2K posts" },
+    { topic: "WebDev", posts: "32.8K posts" },
+    { topic: "Design Thinking", posts: "28.5K posts" },
+  ];
+
+  const suggestions = [
+    { name: "Tech Innovators", handle: "@techinnovate", avatar: "🚀" },
+    { name: "Design Community", handle: "@designhub", avatar: "🎨" },
+    { name: "Code Masters", handle: "@codemasters", avatar: "💻" },
   ];
 
   return (
     <div className="h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex overflow-hidden">
-      {/* Left Sidebar - Fixed */}
-      <LeftSideBar />
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
 
-      {/* Right Side Content - Scrollable (Middle + Right Sidebar) */}
-      <div className="flex-1 flex overflow-y-auto">
-        {/* Feed */}
-        <div className="flex-1 max-w-2xl">
+      {/* Left Sidebar - Responsive */}
+      <div
+        className={`fixed lg:relative w-64 h-full bg-white border-r border-slate-200 z-50 transform transition-transform duration-300 lg:transform-none ${
+          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        }`}
+      >
+        <div className="p-6">
+          {/* Close button for mobile */}
+          <div className="flex items-center justify-between mb-8 lg:block">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                <span className="text-white font-bold text-xl">T</span>
+              </div>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Thrynk
+              </h1>
+            </div>
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="lg:hidden p-2 hover:bg-slate-100 rounded-lg"
+              aria-label="Close menu"
+            >
+              <X size={24} />
+            </button>
+          </div>
+
+          <nav className="space-y-2">
+            {sidebarItems.map((item) => (
+              <button
+                key={item.name}
+                className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all ${
+                  item.active
+                    ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
+                    : "text-slate-600 hover:bg-slate-100"
+                }`}
+              >
+                <item.icon size={22} />
+                <span className="font-medium">{item.name}</span>
+              </button>
+            ))}
+          </nav>
+
+          <button className="w-full mt-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 rounded-xl font-medium shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
+            <Plus size={20} />
+            Post
+          </button>
+        </div>
+      </div>
+
+      {/* Main Content Area - Scrollable */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* Feed - Center Column */}
+        <div className="flex-1 overflow-y-auto">
           {/* Header */}
-          <div className="bg-white/80 backdrop-blur-xl border-b border-slate-200/60 p-6 sticky top-0 z-10">
-            <div className="flex items-center justify-between mb-6">
+          <div className="bg-white/80 backdrop-blur-xl border-b border-slate-200/60 p-4 lg:p-6 sticky top-0 z-10">
+            <div className="flex items-center gap-4 mb-4 lg:mb-6">
+              {/* Mobile menu button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(true)}
+                className="lg:hidden p-2 hover:bg-slate-100 rounded-lg"
+                aria-label="Open menu"
+              >
+                <Menu size={24} />
+              </button>
+
               <div className="relative flex-1 max-w-md">
                 <Search
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"
+                  className="absolute left-3 lg:left-4 top-1/2 transform -translate-y-1/2 text-slate-400"
                   size={20}
                 />
                 <input
                   type="text"
                   placeholder="Search Thrynk..."
-                  className="w-full pl-12 pr-4 py-3 bg-slate-100 rounded-full border-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  className="w-full pl-10 lg:pl-12 pr-4 py-2 lg:py-3 bg-slate-100 rounded-full border-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm lg:text-base"
                 />
               </div>
             </div>
 
             {/* Post Input */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
-              <div className="flex gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold">
+            <div className="bg-white rounded-2xl p-4 lg:p-6 shadow-sm border border-slate-100">
+              <div className="flex gap-3 lg:gap-4">
+                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold flex-shrink-0">
                   M
                 </div>
                 <div className="flex-1">
                   <input
                     type="text"
-                    placeholder="What's on your Mind? 🤔"
-                    className="w-full text-lg border-none outline-none placeholder-slate-400"
+                    placeholder="What&apos;s on your Mind? 🤔"
+                    className="w-full text-base lg:text-lg border-none outline-none placeholder-slate-400"
                     onFocus={() => setIsPostInputFocused(true)}
                     onBlur={() => setIsPostInputFocused(false)}
                   />
 
-                  {/* Post Actions - Show when focused */}
+                  {/* Post Actions */}
                   {isPostInputFocused && (
-                    <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-100">
-                      <div className="flex gap-4">
-                        <button className="flex items-center gap-2 text-blue-500 hover:bg-blue-50 px-3 py-2 rounded-lg transition-colors">
-                          <Image size={20} />
-                          <span className="text-sm font-medium">Photo</span>
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-4 pt-4 border-t border-slate-100 gap-3">
+                      <div className="flex flex-wrap gap-2 lg:gap-4">
+                        <button className="flex items-center gap-1 lg:gap-2 text-blue-500 hover:bg-blue-50 px-2 lg:px-3 py-2 rounded-lg transition-colors" aria-label="Add photo">
+                          <ImageIcon size={18} />
+                          <span className="text-xs lg:text-sm font-medium">Photo</span>
                         </button>
-                        <button className="flex items-center gap-2 text-yellow-500 hover:bg-yellow-50 px-3 py-2 rounded-lg transition-colors">
-                          <Smile size={20} />
-                          <span className="text-sm font-medium">Emoji</span>
+                        <button className="flex items-center gap-1 lg:gap-2 text-yellow-500 hover:bg-yellow-50 px-2 lg:px-3 py-2 rounded-lg transition-colors" aria-label="Add emoji">
+                          <Smile size={18} />
+                          <span className="text-xs lg:text-sm font-medium hidden sm:inline">Emoji</span>
                         </button>
-                        <button className="flex items-center gap-2 text-red-500 hover:bg-red-50 px-3 py-2 rounded-lg transition-colors">
-                          <MapPin size={20} />
-                          <span className="text-sm font-medium">Location</span>
+                        <button className="flex items-center gap-1 lg:gap-2 text-red-500 hover:bg-red-50 px-2 lg:px-3 py-2 rounded-lg transition-colors" aria-label="Add location">
+                          <MapPin size={18} />
+                          <span className="text-xs lg:text-sm font-medium hidden md:inline">Location</span>
                         </button>
-                        <button className="flex items-center gap-2 text-purple-500 hover:bg-purple-50 px-3 py-2 rounded-lg transition-colors">
-                          <Calendar size={20} />
-                          <span className="text-sm font-medium">Schedule</span>
+                        <button className="flex items-center gap-1 lg:gap-2 text-purple-500 hover:bg-purple-50 px-2 lg:px-3 py-2 rounded-lg transition-colors" aria-label="Schedule post">
+                          <Calendar size={18} />
+                          <span className="text-xs lg:text-sm font-medium hidden md:inline">Schedule</span>
                         </button>
                       </div>
-                      <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-full font-medium hover:shadow-lg transition-all">
+                      <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-full font-medium hover:shadow-lg transition-all text-sm lg:text-base w-full sm:w-auto">
                         Post
                       </button>
                     </div>
@@ -226,26 +285,26 @@ const ThrynkPlatform = () => {
           </div>
 
           {/* Posts */}
-          <div className="p-6 space-y-6">
+          <div className="p-3 lg:p-6 space-y-4 lg:space-y-6">
             {posts.map((post) => (
               <div
                 key={post.id}
-                className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300"
+                className="bg-white rounded-2xl lg:rounded-3xl p-4 lg:p-8 shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300"
               >
-                <div className="flex justify-between items-start mb-6">
-                  <div className="flex gap-4">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-r from-pink-400 to-orange-400 flex items-center justify-center text-2xl">
+                <div className="flex justify-between items-start mb-4 lg:mb-6">
+                  <div className="flex gap-3 lg:gap-4">
+                    <div className="w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-gradient-to-r from-pink-400 to-orange-400 flex items-center justify-center text-xl lg:text-2xl flex-shrink-0">
                       {post.user.avatar}
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <h3 className="font-bold text-slate-800 text-lg">
+                        <h3 className="font-bold text-slate-800 text-sm lg:text-lg">
                           {post.user.name}
                         </h3>
                         {post.user.verified && (
-                          <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                          <div className="w-4 h-4 lg:w-5 lg:h-5 bg-blue-500 rounded-full flex items-center justify-center">
                             <svg
-                              className="w-3 h-3 text-white"
+                              className="w-2 h-2 lg:w-3 lg:h-3 text-white"
                               fill="currentColor"
                               viewBox="0 0 20 20"
                             >
@@ -258,47 +317,47 @@ const ThrynkPlatform = () => {
                           </div>
                         )}
                       </div>
-                      <p className="text-slate-500">
+                      <p className="text-slate-500 text-xs lg:text-base">
                         {post.user.handle} • {post.time}
                       </p>
                     </div>
                   </div>
-                  <button className="text-slate-400 hover:text-slate-600 p-2">
+                  <button className="text-slate-400 hover:text-slate-600 p-2" aria-label="More options">
                     <MoreHorizontal size={20} />
                   </button>
                 </div>
 
-                <p className="text-slate-700 mb-6 text-lg leading-relaxed">
+                <p className="text-slate-700 mb-4 lg:mb-6 text-sm lg:text-lg leading-relaxed">
                   {post.content}
                 </p>
 
                 {post.image && (
-                  <div className="mb-6 rounded-2xl bg-gradient-to-br from-yellow-100 to-orange-100 p-8 flex items-center justify-center">
-                    <span className="text-6xl">{post.image}</span>
+                  <div className="mb-4 lg:mb-6 rounded-xl lg:rounded-2xl bg-gradient-to-br from-yellow-100 to-orange-100 p-6 lg:p-8 flex items-center justify-center">
+                    <span className="text-4xl lg:text-6xl">{post.image}</span>
                   </div>
                 )}
 
                 <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                  <button className="flex items-center gap-2 text-slate-500 hover:text-red-500 transition-colors group">
-                    <div className="p-2 rounded-full group-hover:bg-red-50">
-                      <Heart size={18} />
+                  <button className="flex items-center gap-1 lg:gap-2 text-slate-500 hover:text-red-500 transition-colors group" aria-label="Like">
+                    <div className="p-1 lg:p-2 rounded-full group-hover:bg-red-50">
+                      <Heart size={16} className="lg:w-5 lg:h-5" />
                     </div>
-                    <span className="font-medium">{post.likes}</span>
+                    <span className="font-medium text-xs lg:text-base">{post.likes}</span>
                   </button>
-                  <button className="flex items-center gap-2 text-slate-500 hover:text-blue-500 transition-colors group">
-                    <div className="p-2 rounded-full group-hover:bg-blue-50">
-                      <MessageCircle size={18} />
+                  <button className="flex items-center gap-1 lg:gap-2 text-slate-500 hover:text-blue-500 transition-colors group" aria-label="Comment">
+                    <div className="p-1 lg:p-2 rounded-full group-hover:bg-blue-50">
+                      <MessageCircle size={16} className="lg:w-5 lg:h-5" />
                     </div>
-                    <span className="font-medium">{post.comments}</span>
+                    <span className="font-medium text-xs lg:text-base">{post.comments}</span>
                   </button>
-                  <button className="flex items-center gap-2 text-slate-500 hover:text-green-500 transition-colors group">
-                    <div className="p-2 rounded-full group-hover:bg-green-50">
-                      <Repeat2 size={18} />
+                  <button className="flex items-center gap-1 lg:gap-2 text-slate-500 hover:text-green-500 transition-colors group" aria-label="Repost">
+                    <div className="p-1 lg:p-2 rounded-full group-hover:bg-green-50">
+                      <Repeat2 size={16} className="lg:w-5 lg:h-5" />
                     </div>
                   </button>
-                  <button className="flex items-center gap-2 text-slate-500 hover:text-purple-500 transition-colors group">
-                    <div className="p-2 rounded-full group-hover:bg-purple-50">
-                      <Share size={18} />
+                  <button className="flex items-center gap-1 lg:gap-2 text-slate-500 hover:text-purple-500 transition-colors group" aria-label="Share">
+                    <div className="p-1 lg:p-2 rounded-full group-hover:bg-purple-50">
+                      <Share size={16} className="lg:w-5 lg:h-5" />
                     </div>
                   </button>
                 </div>
@@ -306,69 +365,93 @@ const ThrynkPlatform = () => {
             ))}
           </div>
 
-          {/* Tabs - At bottom of middle section */}
-          <div className="bg-white/80 backdrop-blur-xl border-t border-slate-200/60 px-6 sticky bottom-0">
+          {/* Tabs - Bottom Navigation */}
+          <div className="bg-white/80 backdrop-blur-xl border-t border-slate-200/60 sticky bottom-0">
             <div className="flex">
               {tabs.map((tab) => (
-                <Link
+                <a
                   key={tab.key}
                   href={tab.link}
-                  onClick={() =>
-                    setActiveTab(tab.key === "forYou" ? "forYou" : tab.key)
-                  }
-                  className={`flex-1 flex items-center justify-center gap-2 py-4 border-t-2 transition-all duration-200 ${
+                  onClick={() => setActiveTab(tab.key)}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 lg:py-4 border-t-2 transition-all duration-200 ${
                     activeTab === tab.key
                       ? "border-blue-500 text-blue-600 bg-blue-50/50"
                       : "border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50"
                   }`}
                 >
-                  <span className="font-medium">{tab.label}</span>
-                </Link>
+                  <tab.icon size={18} className="lg:hidden" />
+                  <span className="font-medium text-xs lg:text-base">{tab.label}</span>
+                </a>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Right Sidebar */}
-        <div className="w-80 p-6 space-y-6">
-          {/* Thrynk's Pick */}
-          <div className="bg-gradient-to-br from-emerald-100 to-teal-100 rounded-3xl p-6 border border-emerald-200">
-            <h3 className="font-bold text-emerald-800 mb-2">Thrynkefs Pick</h3>
-            <p className="text-emerald-700 font-medium">We have to Do it!</p>
-          </div>
+        {/* Right Sidebar - Hidden on mobile/tablet */}
+        <div className="hidden xl:block w-80 border-l border-slate-200 overflow-y-auto bg-white">
+          <div className="p-6">
+            {/* What's Rising Section */}
+            <div className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl p-6 mb-6">
+              <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <TrendingUp size={20} className="text-blue-500" />
+                What&apos;s Rising
+              </h2>
+              <div className="space-y-4">
+                {trending.map((item, index) => (
+                  <div
+                    key={index}
+                    className="bg-white p-4 rounded-xl hover:shadow-md transition-all cursor-pointer"
+                  >
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <p className="text-xs text-slate-500 mb-1">Trending</p>
+                        <h3 className="font-bold text-slate-800">#{item.topic}</h3>
+                        <p className="text-sm text-slate-500 mt-1">{item.posts}</p>
+                      </div>
+                      <button aria-label="More options">
+                        <MoreHorizontal size={16} className="text-slate-400" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-          {/* What's Rising */}
-          <div className="bg-gradient-to-br from-blue-100 to-indigo-100 rounded-3xl p-6 border border-blue-200">
-            <h3 className="font-bold text-blue-800 mb-4">Whats Rising</h3>
-            <div className="space-y-2">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="h-2 bg-blue-200 rounded-full"></div>
-              ))}
+            {/* Who to Follow */}
+            <div className="bg-gradient-to-br from-slate-50 to-purple-50 rounded-2xl p-6">
+              <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <Users size={20} className="text-purple-500" />
+                Who to Follow
+              </h2>
+              <div className="space-y-4">
+                {suggestions.map((suggestion, index) => (
+                  <div
+                    key={index}
+                    className="bg-white p-4 rounded-xl hover:shadow-md transition-all"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center text-xl">
+                          {suggestion.avatar}
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-slate-800 text-sm">
+                            {suggestion.name}
+                          </h3>
+                          <p className="text-xs text-slate-500">{suggestion.handle}</p>
+                        </div>
+                      </div>
+                      <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:shadow-lg transition-all flex items-center gap-1">
+                        <UserPlus size={14} />
+                        Follow
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-
-          {/* Today's News - More News Added */}
-          {/* <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
-            <h3 className="font-bold text-slate-800 mb-6">Todays News</h3>
-            <div className="space-y-4">
-              {newsItems.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-3 p-3 rounded-2xl hover:bg-slate-50 transition-colors cursor-pointer"
-                >
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center text-lg">
-                    {item.avatar}
-                  </div>
-                  <div className="flex-1">
-                    <p className="font-semibold text-slate-800">{item.title}</p>
-                    <p className="text-slate-500 text-sm">{item.subtitle}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div> */}
         </div>
-        <RightSideBar />
       </div>
     </div>
   );
