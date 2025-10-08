@@ -134,7 +134,7 @@ const ThrynkPlatform = () => {
     { key: "forYou", label: "For You", icon: TrendingUp, link: "#" },
     { key: "following", label: "Following", icon: Heart, link: "#" },
     { key: "blogs", label: "Blogs", icon: MessageSquare, link: "/blogs" },
-    { key: "news", label: "News",  link: "/news" },
+    
   ];
 
   const newsItems = [
@@ -330,7 +330,7 @@ const ThrynkPlatform = () => {
         <div className="w-80 p-6 space-y-6">
           {/* Thrynk's Pick */}
           <div className="bg-gradient-to-br from-emerald-100 to-teal-100 rounded-3xl p-6 border border-emerald-200">
-            <h3 className="font-bold text-emerald-800 mb-2">Thrynks Pick</h3>
+            <h3 className="font-bold text-emerald-800 mb-2">Thrynkefs Pick</h3>
             <p className="text-emerald-700 font-medium">We have to Do it!</p>
           </div>
 
