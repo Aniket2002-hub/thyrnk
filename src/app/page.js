@@ -134,7 +134,7 @@ const ThrynkPlatform = () => {
     { key: "forYou", label: "For You", icon: TrendingUp, link: "#" },
     { key: "following", label: "Following", icon: Heart, link: "#" },
     { key: "blogs", label: "Blogs", icon: MessageSquare, link: "/blogs" },
-    
+    { key: "news", label: "News",  link: "/news" },
   ];
 
   const newsItems = [
