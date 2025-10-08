@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useState } from "react";
 import {
@@ -12,13 +11,15 @@ import {
   MoreHorizontal,
   Plus,
 } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation"; // ✅ to highlight active route
 
 const LeftSideBar = () => {
-  const [activeSection, setActiveSection] = useState("Home");
+  const pathname = usePathname(); // current route
 
   const sidebarItems = [
-    { name: "Home", icon: Home },
-    { name: "Explore", icon: Compass },
+    { name: "Home", icon: Home, link: "/" },
+    { name: "Explore", icon: Compass, link: "/explore" },
     { name: "Notification", icon: Bell },
     { name: "Messages", icon: MessageSquare },
     { name: "Bookmarks", icon: Bookmark },
@@ -35,20 +36,30 @@ const LeftSideBar = () => {
 
         {/* Sidebar Menu */}
         <nav className="space-y-3 flex-1">
-          {sidebarItems.map((item) => (
-            <button
-              key={item.name}
-              onClick={() => setActiveSection(item.name)}
-              className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-200 ${
-                activeSection === item.name
-                  ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg scale-[1.02]"
-                  : "hover:bg-slate-100 text-slate-600 hover:text-slate-800"
-              }`}
-            >
-              <item.icon size={22} />
-              <span className="font-medium">{item.name}</span>
-            </button>
-          ))}
+          {sidebarItems.map((item) =>
+            item.link ? (
+              <Link
+                key={item.name}
+                href={item.link}
+                className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-200 ${
+                  pathname === item.link
+                    ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg scale-[1.02]"
+                    : "hover:bg-slate-100 text-slate-600 hover:text-slate-800"
+                }`}
+              >
+                <item.icon size={22} />
+                <span className="font-medium">{item.name}</span>
+              </Link>
+            ) : (
+              <button
+                key={item.name}
+                className="w-full flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-slate-100 text-slate-600 hover:text-slate-800 transition-all duration-200"
+              >
+                <item.icon size={22} />
+                <span className="font-medium">{item.name}</span>
+              </button>
+            )
+          )}
         </nav>
 
         {/* Create Button */}
