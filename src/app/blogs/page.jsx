@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import {
   Search,
@@ -12,131 +11,104 @@ import {
   Plus,
   MoreHorizontal,
   Heart,
-  MessageCircle,
-  Repeat2,
-  Share,
-  TrendingUp,
-  Image as ImageIcon,
-  Smile,
-  MapPin,
   Calendar,
+  Eye,
   Menu,
   X,
+  Image,
+  TrendingUp,
   Users,
-  Hash,
   UserPlus,
+  Smile,
+  MapPin,
 } from "lucide-react";
 
-const ThrynkPlatform = () => {
-  const [activeTab, setActiveTab] = useState("forYou");
+const BlogPage = () => {
+  // Set the initial active tab to 'blogs' to match the user's intent to view the 'Blogs' page
+  // The original image shows 'For You' as active, but the user is asking about the 'Blogs' view.
+  // I will assume 'blogs' should be the active one in this component, but you can change it back to 'forYou'.
+  const [activeTab, setActiveTab] = useState("blogs");
   const [isPostInputFocused, setIsPostInputFocused] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuMenuOpen] = useState(false);
 
-   const sidebarItems = [
-    { name: "Home", icon: Home, active: true },
-    { name: "Explore", icon: Compass, active: false }, // Added Explore back for completeness
+  const sidebarItems = [
+    { name: "Home", icon: Home, active: false, link: "/" },
+    { name: "Explore", icon: Compass, active: false },
     { name: "Notification", icon: Bell },
     { name: "Messages", icon: MessageSquare },
     { name: "Bookmarks", icon: Bookmark },
-    { name: "Thrynk Pick", icon: ImageIcon }, // Based on image
+    { name: "Thrynk Pick", icon: Image },
     { name: "Profile", icon: User },
     { name: "More", icon: MoreHorizontal },
   ];
 
-  const posts = [
+  const tabs = [
+    { key: "forYou", label: "For You", link: "/" },
+    { key: "following", label: "Following", link: "#" },
+    { key: "blogs", label: "Blogs", link: "/blogs" },
+    // { key: "news", label: "News", link: "#" },
+  ];
+
+  const blogPosts = [
     {
       id: 1,
-      user: {
-        name: "Nitya Shri",
-        handle: "@nityeshri",
-        avatar: "👩‍💻",
-        verified: true,
-      },
-      content: "Just baked a fresh batch chocolate chip cookies 🍪",
-      image: "🍪",
-      likes: 13,
-      comments: 1816,
-      time: "2h",
+      title: "When RAM Runs Out: Exploring Virtual Memory with Python",
+      description:
+        "A hands-on guide to paging, partitioning, and coding a memory usage monitor with psutil",
+      author: "Mark Andrews",
+      platform: "Python in Plain English",
+      timeAgo: "2d ago",
+      reads: 101,
+      image: "💻",
+      category: "Programming",
     },
     {
       id: 2,
-      user: {
-        name: "Alex Chen",
-        handle: "@alextech",
-        avatar: "👨‍💼",
-        verified: true,
-      },
-      content:
-        "Working on an exciting new AI project! The future of technology is here and it's absolutely mind-blowing 🚀✨",
-      likes: 247,
-      comments: 892,
-      time: "4h",
+      title: "You Can't Fire Me, I AM Fire",
+      description: "Before phones, we stared at the flames in our hands",
+      author: "Daniel Williams",
+      platform: "Zenite",
+      timeAgo: "1d ago",
+      reads: 668,
+      responses: 15,
+      image: "🔥",
+      category: "Life",
     },
     {
       id: 3,
-      user: {
-        name: "Sarah Wilson",
-        handle: "@sarahcreates",
-        avatar: "👩‍🎨",
-        verified: false,
-      },
-      content:
-        "Just finished designing a new mobile app interface. Clean, minimal, and user-friendly! What do you think? 📱",
-      image: "🎨",
-      likes: 156,
-      comments: 423,
-      time: "6h",
+      title: "Wherever I Go ChatGPT Follows Me",
+      description: "The internet is not dead, we're just lynching it",
+      author: "Alberto Romero",
+      platform: "AI Insights",
+      timeAgo: "3h ago",
+      reads: 432,
+      image: "🤖",
+      category: "AI",
     },
     {
       id: 4,
-      user: {
-        name: "David Kim",
-        handle: "@daviddev",
-        avatar: "👨‍💻",
-        verified: true,
-      },
-      content:
-        "Breaking: New JavaScript framework released! This could change everything we know about web development 🔥",
-      likes: 892,
-      comments: 1234,
-      time: "8h",
+      title: "The Future of Web Development in 2025",
+      description: "Exploring emerging trends and technologies that will shape the next generation of web applications",
+      author: "Sarah Chen",
+      platform: "Tech Forward",
+      timeAgo: "5h ago",
+      reads: 892,
+      responses: 23,
+      image: "🌐",
+      category: "Web Dev",
     },
     {
       id: 5,
-      user: {
-        name: "Emma Rodriguez",
-        handle: "@emmacreates",
-        avatar: "👩‍🎨",
-        verified: false,
-      },
-      content:
-        "Just launched my new portfolio website! Took me 3 months to perfect every detail. Check it out! ✨",
-      image: "💻",
-      likes: 445,
-      comments: 167,
-      time: "12h",
+      title: "Building Scalable Microservices with Node.js",
+      description: "Best practices and architectural patterns for creating robust distributed systems",
+      author: "Michael Rodriguez",
+      platform: "Backend Mastery",
+      timeAgo: "1d ago",
+      reads: 567,
+      responses: 12,
+      image: "⚙️",
+      category: "Backend",
     },
-    {
-      id: 6,
-      user: {
-        name: "Michael Johnson",
-        handle: "@mikej",
-        avatar: "👨‍🚀",
-        verified: true,
-      },
-      content:
-        "Space exploration update: New Mars rover footage is absolutely stunning! The future is here 🚀🔴",
-      likes: 1567,
-      comments: 892,
-      time: "1d",
-    },
-  ];
-
-  const tabs = [
-    { key: "forYou", label: "For You", link: "#", icon: TrendingUp },
-    { key: "following", label: "Following", link: "#", icon: Heart },
-    { key: "blogs", label: "Blogs", link: "/blogs", icon: MessageSquare },
-    // { key: "news", label: "News", link: "#", icon: Hash },
   ];
 
   const trending = [
@@ -157,18 +129,17 @@ const ThrynkPlatform = () => {
       {isMobileMenuOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-          onClick={() => setIsMobileMenuOpen(false)}
+          onClick={() => setIsMobileMenuMenuOpen(false)}
         />
       )}
 
-      {/* Left Sidebar - Responsive */}
+      {/* Left Sidebar */}
       <div
         className={`fixed lg:relative w-64 h-full bg-white border-r border-slate-200 z-50 transform transition-transform duration-300 lg:transform-none ${
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
         <div className="p-6">
-          {/* Close button for mobile */}
           <div className="flex items-center justify-between mb-8 lg:block">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
@@ -179,7 +150,7 @@ const ThrynkPlatform = () => {
               </h1>
             </div>
             <button
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => setIsMobileMenuMenuOpen(false)}
               className="lg:hidden p-2 hover:bg-slate-100 rounded-lg"
               aria-label="Close menu"
             >
@@ -191,6 +162,7 @@ const ThrynkPlatform = () => {
             {sidebarItems.map((item) => (
               <button
                 key={item.name}
+                onClick={() => item.link && (window.location.href = item.link)}
                 className={`w-full flex items-center gap-4 px-4 py-3 cursor-pointer rounded-xl transition-all ${
                   item.active
                     ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
@@ -210,16 +182,15 @@ const ThrynkPlatform = () => {
         </div>
       </div>
 
-      {/* Main Content Area - Scrollable */}
+      {/* Main Content Area */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Feed - Center Column */}
+        {/* Blog Feed - Center Column */}
         <div className="flex-1 overflow-y-auto">
-          {/* Header */}
+          {/* Header (Search and Post Input) - Sticky */}
           <div className="bg-white/80 backdrop-blur-xl border-b border-slate-200/60 p-4 lg:p-6 sticky top-0 z-10">
             <div className="flex items-center gap-4 mb-4 lg:mb-6">
-              {/* Mobile menu button */}
               <button
-                onClick={() => setIsMobileMenuOpen(true)}
+                onClick={() => setIsMobileMenuMenuOpen(true)}
                 className="lg:hidden p-2 hover:bg-slate-100 rounded-lg"
                 aria-label="Open menu"
               >
@@ -239,27 +210,24 @@ const ThrynkPlatform = () => {
               </div>
             </div>
 
-            {/* Post Input */}
+            {/* What's on your Mind Section */}
             <div className="bg-white rounded-2xl p-4 lg:p-6 shadow-sm border border-slate-100">
               <div className="flex gap-3 lg:gap-4">
-                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold flex-shrink-0">
-                  M
-                </div>
+                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold flex-shrink-0">M</div>
                 <div className="flex-1">
                   <input
                     type="text"
-                    placeholder="What&apos;s on your Mind? 🤔"
+                    placeholder="What's on your Mind? 🤔"
                     className="w-full text-base lg:text-lg border-none outline-none placeholder-slate-400"
                     onFocus={() => setIsPostInputFocused(true)}
                     onBlur={() => setIsPostInputFocused(false)}
                   />
 
-                  {/* Post Actions */}
                   {isPostInputFocused && (
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-4 pt-4 border-t border-slate-100 gap-3">
                       <div className="flex flex-wrap gap-2 lg:gap-4">
                         <button className="flex items-center gap-1 lg:gap-2 text-blue-500 hover:bg-blue-50 px-2 lg:px-3 py-2 rounded-lg transition-colors" aria-label="Add photo">
-                          <ImageIcon size={18} />
+                          <Image size={18} />
                           <span className="text-xs lg:text-sm font-medium">Photo</span>
                         </button>
                         <button className="flex items-center gap-1 lg:gap-2 text-yellow-500 hover:bg-yellow-50 px-2 lg:px-3 py-2 rounded-lg transition-colors" aria-label="Add emoji">
@@ -275,127 +243,124 @@ const ThrynkPlatform = () => {
                           <span className="text-xs lg:text-sm font-medium hidden md:inline">Schedule</span>
                         </button>
                       </div>
-                      <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-full font-medium hover:shadow-lg transition-all text-sm lg:text-base w-full sm:w-auto">
-                        Post
-                      </button>
+                      <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-full font-medium hover:shadow-lg transition-all text-sm lg:text-base w-full sm:w-auto">Post</button>
                     </div>
                   )}
                 </div>
               </div>
             </div>
           </div>
-
-          {/* Posts */}
-          <div className="p-3 lg:p-6 space-y-4 lg:space-y-6">
-            {posts.map((post) => (
-              <div
-                key={post.id}
-                className="bg-white rounded-2xl lg:rounded-3xl p-4 lg:p-8 shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300"
-              >
-                <div className="flex justify-between items-start mb-4 lg:mb-6">
-                  <div className="flex gap-3 lg:gap-4">
-                    <div className="w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-gradient-to-r from-pink-400 to-orange-400 flex items-center justify-center text-xl lg:text-2xl flex-shrink-0">
-                      {post.user.avatar}
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-bold text-slate-800 text-sm lg:text-lg">
-                          {post.user.name}
-                        </h3>
-                        {post.user.verified && (
-                          <div className="w-4 h-4 lg:w-5 lg:h-5 bg-blue-500 rounded-full flex items-center justify-center">
-                            <svg
-                              className="w-2 h-2 lg:w-3 lg:h-3 text-white"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </div>
-                        )}
-                      </div>
-                      <p className="text-slate-500 text-xs lg:text-base">
-                        {post.user.handle} • {post.time}
-                      </p>
-                    </div>
-                  </div>
-                  <button className="text-slate-400 hover:text-slate-600 p-2" aria-label="More options">
-                    <MoreHorizontal size={20} />
-                  </button>
-                </div>
-
-                <p className="text-slate-700 mb-4 lg:mb-6 text-sm lg:text-lg leading-relaxed">
-                  {post.content}
-                </p>
-
-                {post.image && (
-                  <div className="mb-4 lg:mb-6 rounded-xl lg:rounded-2xl bg-gradient-to-br from-yellow-100 to-orange-100 p-6 lg:p-8 flex items-center justify-center">
-                    <span className="text-4xl lg:text-6xl">{post.image}</span>
-                  </div>
-                )}
-
-                <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                  <button className="flex items-center gap-1 lg:gap-2 text-slate-500 hover:text-red-500 transition-colors group" aria-label="Like">
-                    <div className="p-1 lg:p-2 rounded-full group-hover:bg-red-50">
-                      <Heart size={16} className="lg:w-5 lg:h-5" />
-                    </div>
-                    <span className="font-medium text-xs lg:text-base">{post.likes}</span>
-                  </button>
-                  <button className="flex items-center gap-1 lg:gap-2 text-slate-500 hover:text-blue-500 transition-colors group" aria-label="Comment">
-                    <div className="p-1 lg:p-2 rounded-full group-hover:bg-blue-50">
-                      <MessageCircle size={16} className="lg:w-5 lg:h-5" />
-                    </div>
-                    <span className="font-medium text-xs lg:text-base">{post.comments}</span>
-                  </button>
-                  <button className="flex items-center gap-1 lg:gap-2 text-slate-500 hover:text-green-500 transition-colors group" aria-label="Repost">
-                    <div className="p-1 lg:p-2 rounded-full group-hover:bg-green-50">
-                      <Repeat2 size={16} className="lg:w-5 lg:h-5" />
-                    </div>
-                  </button>
-                  <button className="flex items-center gap-1 lg:gap-2 text-slate-500 hover:text-purple-500 transition-colors group" aria-label="Share">
-                    <div className="p-1 lg:p-2 rounded-full group-hover:bg-purple-50">
-                      <Share size={16} className="lg:w-5 lg:h-5" />
-                    </div>
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Tabs - Bottom Navigation */}
-          <div className="bg-white/80 backdrop-blur-xl border-t border-slate-200/60 sticky bottom-0">
-            <div className="flex">
+          
+          {/* Main Content Feed Area */}
+          <div className="pb-20">
+            {/* IN-LINE Tabs (For You, Following, Blogs) - MOVED HERE */}
+            <div className="flex border-b border-slate-200 bg-white/80 backdrop-blur-sm sticky top-[182px] lg:top-[194px] z-10">
               {tabs.map((tab) => (
-                <a
+                <button
                   key={tab.key}
-                  href={tab.link}
                   onClick={() => setActiveTab(tab.key)}
-                  className={`flex-1 flex items-center justify-center gap-2 py-3 lg:py-4 border-t-2 transition-all duration-200 ${
+                  className={`flex-1 flex items-center justify-center py-4 transition-all duration-200 text-sm lg:text-base font-medium ${
                     activeTab === tab.key
-                      ? "border-blue-500 text-blue-600 bg-blue-50/50"
-                      : "border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-50"
+                      ? "border-b-4 border-blue-500 text-blue-600"
+                      : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
                   }`}
                 >
-                  <tab.icon size={18} className="lg:hidden" />
-                  <span className="font-medium text-xs lg:text-base">{tab.label}</span>
-                </a>
+                  <span>{tab.label}</span>
+                </button>
               ))}
+            </div>
+
+            {/* Blog Posts */}
+            <div className="p-3 lg:p-6 space-y-4 lg:space-y-6">
+              {/* Conditional Title based on activeTab (optional) */}
+              <h1 className="text-2xl lg:text-3xl font-bold text-slate-800 mb-4 capitalize">
+                {activeTab === 'blogs' ? 'Blog Articles' : activeTab === 'forYou' ? 'Posts For You' : 'Following Feed'}
+              </h1>
+              
+              {/* Only show blog posts if 'blogs' tab is active for this demo */}
+              {activeTab === 'blogs' ? (
+                blogPosts.map((post) => (
+                  <div
+                    key={post.id}
+                    onClick={() => window.location.href = `/blog/${post.id}`}
+                    className="bg-white rounded-2xl lg:rounded-3xl p-4 lg:p-6 shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                  >
+                    <div className="flex flex-col sm:flex-row gap-4 lg:gap-6">
+                      {/* Blog Info */}
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-3 text-sm text-slate-600">
+                          <div className="w-6 h-6 lg:w-8 lg:h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white text-xs font-bold">
+                            {post.platform ? post.platform.charAt(0) : post.author.charAt(0)}
+                          </div>
+                          <span className="text-xs lg:text-sm">
+                            in <span className="font-medium">{post.platform}</span> by{" "}
+                            <span className="font-medium">{post.author}</span>
+                          </span>
+                        </div>
+
+                        <h2 className="text-lg lg:text-xl font-bold text-slate-900 mb-2 hover:text-blue-600 transition-colors">
+                          {post.title}
+                        </h2>
+                        <p className="text-slate-600 mb-4 text-sm lg:text-base line-clamp-2">
+                          {post.description}
+                        </p>
+
+                        <div className="flex items-center justify-between flex-wrap gap-3">
+                          <div className="flex items-center gap-3 lg:gap-4 text-xs lg:text-sm text-slate-500">
+                            <span className="flex items-center gap-1">
+                              <Calendar size={14} />
+                              {post.timeAgo}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Eye size={14} />
+                              {post.reads}
+                            </span>
+                            {post.responses && (
+                              <span className="flex items-center gap-1">
+                                <MessageSquare size={14} />
+                                {post.responses}
+                              </span>
+                            )}
+                          </div>
+
+                          <div className="flex items-center gap-2">
+                            <button className="p-2 hover:bg-slate-100 rounded-full transition-colors" aria-label="Like" onClick={(e) => e.stopPropagation()}>
+                              <Heart size={16} className="text-slate-400 hover:text-red-500" />
+                            </button>
+                            <button className="p-2 hover:bg-slate-100 rounded-full transition-colors" aria-label="Bookmark" onClick={(e) => e.stopPropagation()}>
+                              <Bookmark size={16} className="text-slate-400 hover:text-blue-500" />
+                            </button>
+                            <button className="p-2 hover:bg-slate-100 rounded-full transition-colors" aria-label="More options" onClick={(e) => e.stopPropagation()}>
+                              <MoreHorizontal size={16} className="text-slate-400" />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Image */}
+                      <div className="w-full sm:w-32 lg:w-40 h-24 lg:h-28 bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl lg:rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <span className="text-3xl lg:text-4xl">{post.image}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center py-10 text-slate-500">
+                  Content for the **{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}** tab would go here.
+                </div>
+              )}
             </div>
           </div>
         </div>
 
-        {/* Right Sidebar - Hidden on mobile/tablet */}
+        {/* Right Sidebar */}
         <div className="hidden xl:block w-80 border-l border-slate-200 overflow-y-auto bg-white">
           <div className="p-6">
             {/* What's Rising Section */}
             <div className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl p-6 mb-6">
               <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
                 <TrendingUp size={20} className="text-blue-500" />
-                What&apos;s Rising
+                What's Rising
               </h2>
               <div className="space-y-4">
                 {trending.map((item, index) => (
@@ -454,8 +419,14 @@ const ThrynkPlatform = () => {
           </div>
         </div>
       </div>
+
+      {/* REMOVED: Tabs - Bottom Navigation (Fixed) - as requested by the user */}
+      {/* <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-slate-200/60 z-30 lg:left-64">
+        ... Tabs logic was here ...
+      </div> 
+      */}
     </div>
   );
 };
 
-export default ThrynkPlatform;
+export default BlogPage;
