@@ -32,12 +32,13 @@ const ThrynkPlatform = () => {
   const [isPostInputFocused, setIsPostInputFocused] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const sidebarItems = [
+   const sidebarItems = [
     { name: "Home", icon: Home, active: true },
-    { name: "Explore", icon: Compass, active: false },
+    { name: "Explore", icon: Compass, active: false }, // Added Explore back for completeness
     { name: "Notification", icon: Bell },
     { name: "Messages", icon: MessageSquare },
     { name: "Bookmarks", icon: Bookmark },
+    { name: "Thrynk Pick", icon: ImageIcon }, // Based on image
     { name: "Profile", icon: User },
     { name: "More", icon: MoreHorizontal },
   ];
@@ -135,7 +136,7 @@ const ThrynkPlatform = () => {
     { key: "forYou", label: "For You", link: "#", icon: TrendingUp },
     { key: "following", label: "Following", link: "#", icon: Heart },
     { key: "blogs", label: "Blogs", link: "/blogs", icon: MessageSquare },
-    { key: "news", label: "News", link: "#", icon: Hash },
+    // { key: "news", label: "News", link: "#", icon: Hash },
   ];
 
   const trending = [
@@ -186,11 +187,11 @@ const ThrynkPlatform = () => {
             </button>
           </div>
 
-          <nav className="space-y-2">
+          <nav className="space-y-2 cursor-pointer">
             {sidebarItems.map((item) => (
               <button
                 key={item.name}
-                className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all ${
+                className={`w-full flex items-center gap-4 px-4 py-3 cursor-pointer rounded-xl transition-all ${
                   item.active
                     ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
                     : "text-slate-600 hover:bg-slate-100"
